@@ -262,8 +262,104 @@ function toggleFunction() {
     } else {
         x.className = x.className.replace(" w3-show", "");
     }
-}
-</script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>enter email id </title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <style>
+    body {
+      background: #fff0f0;
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding-top: 80px;
+    }
+
+    input, button {
+      padding: 10px 15px;
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 200px;
+      height: 120px;
+      margin: 50px auto;
+      background: #e60073;
+      clip-path: polygon(0 0, 100% 0, 100% 70%, 0 70%);
+      display: none;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .envelope::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      height: 120px;
+      background: #ff99cc;
+      clip-path: polygon(0 0, 100% 0, 50% 70%);
+      transition: 0.6s ease;
+    }
+
+    .letter {
+      display: none;
+      margin-top: 30px;
+      font-size: 28px;
+      color: #c2185b;
+      animation: popIn 1s forwards;
+    }
+
+    .opened .envelope::after {
+      transform: translateY(-100px) rotateX(180deg);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0.5); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Enter the code to access admin</h2>
+  <input type="text" id="codeInput" placeholder="Enter code">
+  <button onclick="unlockLetter()">Submit</button>
+
+  <div class="envelope" id="envelope" onclick="openEnvelope()"></div>
+
+  <div class="letter" id="letter">I like you so much i cant expain it in words</div> 
+  <div class="letter" id="letter" > but if no is it bcs i don't interest u or u have some one in mind </div> 
+
+  <script>
+    function unlockLetter() {
+      const input = document.getElementById("codeInput").value;
+      if (input === "4nG3|_1n3^M8r1@#") {
+        document.getElementById("envelope").style.display = "block";
+      } else {
+        alert(" Try again Angeline Wrong code");
+      }
+    }
+    
+
+    function openEnvelope() {
+      const envelope = document.getElementById("envelope");
+      const letter = document.getElementById("letter");
+      envelope.classList.add("opened");
+      setTimeout(() => {
+        letter.style.display = "block";
+        confetti({
+          particleCount: 500,
+          spread: 80,
+          origin: { y: 0.6 },
+        });
+      }, 500);
+    }
+  </script>
+
 
 </body>
 </html>
